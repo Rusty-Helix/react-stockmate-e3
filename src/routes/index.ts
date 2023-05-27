@@ -6,7 +6,7 @@ import {OverridableComponent} from '@mui/material/OverridableComponent'
 
 export const MAIN = '/' as const;
 export const BLOTTER = '/blotter' as const;
-export const TRADE_TICKET= '/tradeticket' as const;
+export const TRADE_TICKET= '/trade-ticket' as const;
 
 
 
@@ -22,7 +22,7 @@ export type RouteType = {
         typeof TRADE_TICKET
 }
 export const ROUTES: RouteType[] = [
-    {'label': 'Home', path: MAIN, icon: HomeIcon},
+    {'label': 'Dashboard', path: MAIN, icon: HomeIcon},
     {'label': 'Trade Blotter', path: BLOTTER, icon: TableViewIcon},
     {'label': 'Trade Ticket', path: TRADE_TICKET, icon: ConfirmationNumberIcon}
 ]
