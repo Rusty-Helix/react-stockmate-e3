@@ -1,8 +1,9 @@
 // import {Typography} from '@mui/material'
 // import {DataGrid} from '../../components/DataGrid/DataGrid'
-import {DataGrid} from '../../components/DataGrid/DataGrid'
 import React, {useState, useCallback} from 'react'
+import {DataGrid} from '../../components/DataGrid/DataGrid'
 import {useGetTradesQuery} from '../../services/tradesApi'
+import {tradeBlotterColDef} from './config'
 
 export const Blotter: React.FC = (): JSX.Element => {
     const [showNoRowsOverlay, setShowNoRowsOverlay] = useState<boolean>(false)
@@ -14,8 +15,9 @@ export const Blotter: React.FC = (): JSX.Element => {
     return (
             <div>
                 <DataGrid
-                    gridData={[{name:'typescript'}]}
-                    colDef={[{field: 'name'}]}
+                    // gridData={[{name:'typescript'}]}
+                    gridData={data || []}
+                    colDef={tradeBlotterColDef}
                     showNoRowsOverlay={showNoRowsOverlay}
                     rowClickHandler={rowClickHandler}
                     size={{width: '100%', height: 1000}}
