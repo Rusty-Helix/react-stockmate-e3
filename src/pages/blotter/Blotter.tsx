@@ -1,15 +1,32 @@
-import {Typography} from '@mui/material'
-import React from 'react'
+// import {Typography} from '@mui/material'
+// import {DataGrid} from '../../components/DataGrid/DataGrid'
+import {DataGrid} from '../../components/DataGrid/DataGrid'
+import React, {useState, useCallback} from 'react'
+import {useGetTradesQuery} from '../../services/tradesApi'
 
 export const Blotter: React.FC = (): JSX.Element => {
+    const [showNoRowsOverlay, setShowNoRowsOverlay] = useState<boolean>(false)
+    const {data} = useGetTradesQuery(undefined, {pollingInterval: 30000})
+    const rowClickHandler = useCallback(()=>{
+        
+    }, []);
+    
     return (
             <div>
-                <Typography
+                <DataGrid
+                    gridData={[{name:'typescript'}]}
+                    colDef={[{field: 'name'}]}
+                    showNoRowsOverlay={showNoRowsOverlay}
+                    rowClickHandler={rowClickHandler}
+                    size={{width: '100%', height: 1000}}
+                >
+                </DataGrid>
+                {/* <Typography
                     component='div'
                     variant='h3'
                 >
                     Trade Blotter
-                </Typography>
+                </Typography> */}
             </div>
         )
 }

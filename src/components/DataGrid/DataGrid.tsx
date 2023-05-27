@@ -6,7 +6,7 @@ import {
     RowClickedEvent,
     GridApi
 } from 'ag-grid-community'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { AgGridReact } from 'ag-grid-react';
 
 const GridStyledWrapper = styled('div')(({theme})=>({
@@ -23,6 +23,7 @@ interface DataGridProps<T> {
     gridData: T[];
     colDef: ColDef[];
     rowClickHandler?: (event: RowClickedEvent) => void;
+    children: any;
 }
 
 export const DataGrid = <T,> ({
@@ -30,6 +31,7 @@ export const DataGrid = <T,> ({
     size,
     gridData,
     colDef,
+    children,
     rowClickHandler = undefined,
 }:DataGridProps<T>): JSX.Element => {
     const [gridApi, setGridApi] = useState<GridApi>()
@@ -39,6 +41,13 @@ export const DataGrid = <T,> ({
         setGridApi(params.api);
         setGridColumnApi(params.columnApi);
     }
+
+    useEffect(()=>{
+        if (showNoRowsOverlay) {
+            gridApi?.showNoRowsOverlay()
+        }
+    }, [gridApi, showNoRowsOverlay])
+
     return (
         <GridStyledWrapper>
 

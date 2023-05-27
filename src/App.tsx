@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Provider} from 'react-redux'
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import {
   createTheme,
@@ -19,6 +20,7 @@ import {ROUTES} from './routes/index'
 import {Dashboard} from './pages/dashboard/Dashboard'
 import {Blotter} from './pages/blotter/Blotter'
 import {TradeTicket} from './pages/tradeticket/TradeTicket'
+import {store} from './store'
 
 const App: React.FC = (): JSX.Element => {
   const [themeMode, setThemeMode] = useState<"light" | "dark">("dark");
@@ -43,6 +45,8 @@ const App: React.FC = (): JSX.Element => {
   }, [themeMode])
 
   return (
+    <Provider store={store}>
+
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBarComponent
@@ -50,12 +54,12 @@ const App: React.FC = (): JSX.Element => {
         onThemeChange={onThemeChange}
         isDarkMode={themeMode==='dark'}
         isDrawerOpen={sideBarToggle}
-      />
+        />
       <SideBar
         isOpen={sideBarToggle}
         handleDrawerToggle={handleDrawerToggle}
         children={<Menu links={ROUTES}/>}
-      />
+        />
           <Routes>
             <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<Blotter />} path="/blotter" />
@@ -64,6 +68,8 @@ const App: React.FC = (): JSX.Element => {
             <Route element={<Navigate to="/dashboard"/>} path="*"/>
         </Routes>
     </ThemeProvider>
+    
+    </Provider>
   );
 }
 
