@@ -8,7 +8,7 @@ export const Blotter: React.FC = (): JSX.Element => {
                     component='div'
                     variant='h3'
                 >
-                    Blotter
+                    Trade Blotter
                 </Typography>
             </div>
         )
